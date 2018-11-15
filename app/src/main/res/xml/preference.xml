@@ -1,0 +1,16 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!--<PreferenceCategory>-->
+
+        <!--<com.jaredrummler.android.colorpicker.ColorPreference-->
+            <!--android:defaultValue="@color/color_default"-->
+            <!--android:key="default_color"-->
+            <!--android:summary="@string/color_default_summary"-->
+            <!--android:title="@string/color_default_title"/>-->
+
+        <!--...-->
+
+    <!--</PreferenceCategory>-->
+
+</PreferenceScreen>

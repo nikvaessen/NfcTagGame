@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">NfcColorGame</string>
+    <string name="action_settings">Settings</string>
+    <string name="welcome_message">Select a color by clicking on the plus symbol. Alternatively, switch to receive mode by switching in the upper right corner!</string>
+</resources>
