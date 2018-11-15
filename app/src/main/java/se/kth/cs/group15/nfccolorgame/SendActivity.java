@@ -43,9 +43,7 @@ public class SendActivity extends Activity {
         mBackground = findViewById(R.id.sa_background);
         mBackground.setBackgroundColor(-13619152);
 
-        mAdapter = ((NfcManager) getApplicationContext()
-                .getSystemService(Context.NFC_SERVICE))
-                .getDefaultAdapter();
+        mAdapter = NfcAdapter.getDefaultAdapter(this);
 
         mButton = findViewById(R.id.sa_button);
         mButton.setOnClickListener(new View.OnClickListener() {
