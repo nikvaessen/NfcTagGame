@@ -31,6 +31,7 @@ public class SendActivity extends Activity {
         }
 
         mBackground = findViewById(R.id.sa_background);
+        mBackground.setBackgroundColor(-13619152);
 
         mButton = findViewById(R.id.sa_button);
         mButton.setOnClickListener(new View.OnClickListener() {
@@ -65,7 +66,7 @@ public class SendActivity extends Activity {
     }
 
     private void selectedColor(int color) {
-        if(getActionBar() != null) {
+        if (getActionBar() != null) {
             mActionBar.setTitle(R.string.sa_title_selected_color);
         }
         mButton.setText(R.string.sa_button_color_reselect);
@@ -83,8 +84,8 @@ public class SendActivity extends Activity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) { ;
-        switch (item.getItemId()){
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
             case android.R.id.home:
                 this.finish();
                 return true;

@@ -19,13 +19,12 @@ public class ReceiveActivity extends Activity {
             getActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-
         mBackGround = findViewById(R.id.ra_background);
+        mBackGround.setBackgroundColor(-13619152);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        ;
         switch (item.getItemId()) {
             case android.R.id.home:
                 this.finish();
