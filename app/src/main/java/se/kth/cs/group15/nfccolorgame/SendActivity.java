@@ -3,7 +3,12 @@ package se.kth.cs.group15.nfccolorgame;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.nfc.NdefMessage;
+import android.nfc.NdefRecord;
+import android.nfc.NfcAdapter;
+import android.nfc.NfcManager;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,11 +18,16 @@ import com.skydoves.colorpickerpreference.ColorEnvelope;
 import com.skydoves.colorpickerpreference.ColorListener;
 import com.skydoves.colorpickerpreference.ColorPickerDialog;
 
+import java.util.Locale;
+
 public class SendActivity extends Activity {
 
     private ActionBar mActionBar;
     private Button mButton;
     private View mBackground;
+    private int mSelectedColor;
+    private boolean mIsColorSelected;
+    private NfcAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +42,10 @@ public class SendActivity extends Activity {
 
         mBackground = findViewById(R.id.sa_background);
         mBackground.setBackgroundColor(-13619152);
+
+        mAdapter = ((NfcManager) getApplicationContext()
+                .getSystemService(Context.NFC_SERVICE))
+                .getDefaultAdapter();
 
         mButton = findViewById(R.id.sa_button);
         mButton.setOnClickListener(new View.OnClickListener() {
@@ -70,6 +84,8 @@ public class SendActivity extends Activity {
             mActionBar.setTitle(R.string.sa_title_selected_color);
         }
         mButton.setText(R.string.sa_button_color_reselect);
+        mSelectedColor = color;
+        mIsColorSelected = true;
 
         setBackgroundColor(color);
         activateNfc();
@@ -80,7 +96,7 @@ public class SendActivity extends Activity {
     }
 
     private void activateNfc() {
-        System.out.println("now NFC should be enabled somehow :)");
+        mAdapter.setNdefPushMessage(getBackGroundColorMessage(), this);
     }
 
     @Override
@@ -92,5 +108,19 @@ public class SendActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private NdefMessage getBackGroundColorMessage() {
+        if (!mIsColorSelected) {
+            throw new IllegalArgumentException("did not select color yet");
+        }
+
+        NdefRecord colorRecord = NdefRecord
+                .createTextRecord(
+                        Locale.ENGLISH.toLanguageTag(),
+                        Integer.toString(mSelectedColor)
+                );
+
+        return new NdefMessage(colorRecord);
     }
 }
